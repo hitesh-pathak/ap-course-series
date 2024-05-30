@@ -30,3 +30,6 @@ dist-ssr
 *.gpg
 *.pem
 
+# temp
+temp
+
