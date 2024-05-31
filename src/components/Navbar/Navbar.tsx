@@ -1,9 +1,12 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import DropDownArrow from '../icons/DropDownArrow';
+import ContactButton from './ContactButton';
+import LngSelector from './LngSelector';
 
 import { StringDict } from '../../types/common';
 import { useMemo } from 'react';
+import HamMenu from './HamMenu';
 
 interface NavMenuLinkProps {
   to?: string;
@@ -74,7 +77,7 @@ export default function Navbar() {
   ];
 
   const menuDropDownLookup = ['navbar.live_sess', 'navbar.video_series'].reduce(
-    (acc: StringDict, key: string) => {
+    (acc: StringDict<boolean>, key: string) => {
       acc[key] = key === 'navbar.video_series';
       return acc;
     },
@@ -82,38 +85,44 @@ export default function Navbar() {
   );
 
   return (
-    <div id="main-nav-bar" className="h-12 bg-brand-orange-700">
-      <div className="mx-auto h-full max-w-screen-2xl select-none text-white">
-        <div className="flex h-full justify-between text-xs">
-          <div className="flex items-stretch p1-4 lg:p1-8 text-sm">
-            <Link to="/" className="shrink-0 self-center">
-              <img
-                className="mr-2 h-8 w-8 rounded-full"
-                src="https://acharyaprashant.org/images/ic_favicon.png"
-                alt="Acharya Prashant Logo"
-              />
-            </Link>
-            <div className="hidden items-stretch justify-center font-medium md:flex">
-              {menuItems.map((menuItem) =>
-                menuDropDownLookup[menuItem] === undefined ? (
-                  <NavMenuLink
-                    to={'/'}
-                    displayText={t(menuItem)}
-                    isActive={menuDropDownLookup[menuItem] === true}
-                    key={menuItem}
-                  />
-                ) : (
-                  <NavMenuDropDown
-                    displayText={t(menuItem)}
-                    isActive={menuDropDownLookup[menuItem] === true}
-                    key={menuItem}
-                  />
-                )
-              )}
+    <div className="z-100">
+      <div id="main-nav-bar" className="h-12 bg-brand-orange-700">
+        <div className="mx-auto h-full max-w-screen-2xl select-none text-white">
+          <div className="flex h-full justify-between text-xs">
+            <div className="flex items-stretch pl-4 lg:pl-8 text-sm">
+              <Link to="/" className="shrink-0 self-center">
+                <img
+                  className="mr-2 h-8 w-8 rounded-full"
+                  src="https://acharyaprashant.org/images/ic_favicon.png"
+                  alt="Acharya Prashant Logo"
+                />
+              </Link>
+              <div className="hidden items-stretch justify-center font-medium md:flex">
+                {menuItems.map((menuItem) =>
+                  menuDropDownLookup[menuItem] === undefined ? (
+                    <NavMenuLink
+                      to={'/'}
+                      displayText={t(menuItem)}
+                      isActive={menuDropDownLookup[menuItem] === true}
+                      key={menuItem}
+                    />
+                  ) : (
+                    <NavMenuDropDown
+                      displayText={t(menuItem)}
+                      isActive={menuDropDownLookup[menuItem] === true}
+                      key={menuItem}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+
+            <div className="flex h-full content-center items-center justify-center lg:mt-[1px] lg:pr-8">
+              <LngSelector />
+              <ContactButton />
+              <HamMenu />
             </div>
           </div>
-
-          <div className="flex h-full content-center items-center justify-center lg:mt-[1px] lg:pr-8"></div>
         </div>
       </div>
     </div>
