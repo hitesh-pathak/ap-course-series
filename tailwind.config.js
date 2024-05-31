@@ -10,6 +10,7 @@ export default {
         'brand-orange-200': '#fed7aa',
         'brand-orange-100': '#ffedd5',
         'gray-title': '#1e293b',
+        'gray-subtitle': '#475569',
       },
       fontFamily: {
         en: [

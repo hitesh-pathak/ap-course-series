@@ -1,4 +1,5 @@
 import SecondNavBar from '../../components/SecondNavBar/SecondNavBar';
+import CourseSeriesBody from './CourseSeriesBody';
 
 export default function CourseSeries() {
   return (
@@ -6,6 +7,7 @@ export default function CourseSeries() {
       <SecondNavBar />
       <div className="relative mx-auto max-w-screen-2xl">
         {/* body comes here */}
+        <CourseSeriesBody />
       </div>
     </div>
   );
