@@ -1,6 +1,4 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 [type='text'],
 input:where(:not([type])),
@@ -38,4 +36,36 @@ input[type='search']::-ms-clear {
   display: none;
   width: 0;
   height: 0;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .spinner-base {
+    @apply h-10 w-10 relative;
+  }
+
+  .spinner-base::before {
+    content: '';
+    @apply h-10 w-10 absolute border-solid border-2 rounded-full;
+    @apply border-brand-orange-100;
+    @apply border-t-brand-orange-600;
+    animation: spinner 0.8s linear infinite;
+  }
+}
+
+@layer utilities {
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spinner {
+    animation: spinner 0.8s linear infinite;
+  }
 }

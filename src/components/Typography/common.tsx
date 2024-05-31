@@ -5,3 +5,11 @@ export function SpanTextEn({ children, ...props }: { children: string }) {
     </span>
   );
 }
+
+export function SpanTextHi({ children, ...props }: { children: string }) {
+  return (
+    <span className="font-hi" {...props}>
+      {children}
+    </span>
+  );
+}

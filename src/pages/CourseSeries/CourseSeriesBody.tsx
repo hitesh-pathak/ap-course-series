@@ -1,18 +1,32 @@
 import { useGetCourseSeriesQuery } from '../../api/apiSice';
 import CSNav from './CSNav';
+import { SpinnerFullScreen } from '../../components/common/Spinner';
+import CSHero from './CSHero';
 export default function CourseSeriesBody() {
   const {
     data: data,
     isError,
+    error,
+    isUninitialized,
     isLoading,
     isFetching,
+    isSuccess,
   } = useGetCourseSeriesQuery();
 
-  console.log(data, isError, isLoading, isFetching);
-
-  return (
-    <div>
-      <CSNav />
-    </div>
-  );
+  if (isUninitialized || isLoading || isFetching) {
+    return <SpinnerFullScreen />;
+  } else if (isError) {
+    throw error;
+  } else if (!data) {
+    throw new Error('Got invalid data from the server');
+  } else if (isSuccess) {
+    return (
+      <div>
+        <CSNav />
+        <CSHero />
+      </div>
+    );
+  } else {
+    throw new Error('Unexpected error');
+  }
 }
