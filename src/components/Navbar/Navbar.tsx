@@ -1,29 +1,41 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import DropDownArrow from '../icons/DropDownArrow';
 
 import { StringDict } from '../../types/common';
+import { useMemo } from 'react';
 
 interface NavMenuLinkProps {
-  to: string;
+  to?: string;
   displayText: string;
+  isActive: boolean;
+}
+interface NavMenuItemProps {
+  highlightOnHover: boolean;
+  isActive: boolean;
+  children: JSX.Element;
 }
 
-function NavMenuItem({ children }: { children: JSX.Element }) {
-  console.log(children);
-  return (
-    <div
-      className="flex whitespace-nowrap text-white/90 cursor-pointer items-center space-x-1 
-       md:px-1.5 lg:px-2.5 2xl:px-4"
-    >
-      {children}
-    </div>
+function NavMenuItem({
+  highlightOnHover = false,
+  isActive = false,
+  children,
+}: NavMenuItemProps) {
+  const classNameCalc = useMemo(
+    () => calculateClassNames(highlightOnHover, isActive),
+    [highlightOnHover, isActive]
   );
+
+  return <div className={classNameCalc}>{children}</div>;
 }
 
-function NavMenuLink({ to = '/', displayText }: NavMenuLinkProps) {
+function NavMenuLink({
+  to = '/',
+  displayText,
+  isActive = false,
+}: NavMenuLinkProps) {
   return (
-    <NavMenuItem>
+    <NavMenuItem highlightOnHover={false} isActive={isActive}>
       <Link to={to} className="flex">
         <div className="flex relative items-center space-x-2">
           <span className="font-en">{displayText}</span>
@@ -33,9 +45,9 @@ function NavMenuLink({ to = '/', displayText }: NavMenuLinkProps) {
   );
 }
 
-function NavMenuDropDown({ displayText }: { displayText: string }) {
+function NavMenuDropDown({ displayText, isActive = false }: NavMenuLinkProps) {
   return (
-    <NavMenuItem>
+    <NavMenuItem highlightOnHover={true} isActive={isActive}>
       <div className="flex relative items-center space-x-2">
         <span className="font-en">{displayText}</span>
         <div className="transition-duration-500 pt-0.5">
@@ -63,14 +75,14 @@ export default function Navbar() {
 
   const menuDropDownLookup = ['navbar.live_sess', 'navbar.video_series'].reduce(
     (acc: StringDict, key: string) => {
-      acc[key] = true;
+      acc[key] = key === 'navbar.video_series';
       return acc;
     },
     {}
   );
 
   return (
-    <div id="main-nav-bar" className="h-12 bg-brand-orange">
+    <div id="main-nav-bar" className="h-12 bg-brand-orange-700">
       <div className="mx-auto h-full max-w-screen-2xl select-none text-white">
         <div className="flex h-full justify-between text-xs">
           <div className="flex items-stretch p1-4 lg:p1-8 text-sm">
@@ -83,20 +95,44 @@ export default function Navbar() {
             </Link>
             <div className="hidden items-stretch justify-center font-medium md:flex">
               {menuItems.map((menuItem) =>
-                menuDropDownLookup[menuItem] ? (
-                  <NavMenuDropDown displayText={t(menuItem)} />
-                ) : (
+                menuDropDownLookup[menuItem] === undefined ? (
                   <NavMenuLink
                     to={'/'}
                     displayText={t(menuItem)}
+                    isActive={menuDropDownLookup[menuItem] === true}
+                    key={menuItem}
+                  />
+                ) : (
+                  <NavMenuDropDown
+                    displayText={t(menuItem)}
+                    isActive={menuDropDownLookup[menuItem] === true}
                     key={menuItem}
                   />
                 )
               )}
             </div>
           </div>
+
+          <div className="flex h-full content-center items-center justify-center lg:mt-[1px] lg:pr-8"></div>
         </div>
       </div>
     </div>
   );
 }
+
+// calculation functions
+const calculateClassNames = (
+  highlightOnHover: boolean,
+  is_active: boolean
+): string => {
+  const baseClassNames =
+    'flex whitespace-nowrap text-white/90 cursor-pointer items-center space-x-1 md:px-1.5 lg:px-2.5 2xl:px-4';
+  const highlightClassNames =
+    ' transition-opacity duration-300 ease-in-out hover:opacity-100 hover:bg-brand-orange-600';
+
+  return highlightOnHover
+    ? baseClassNames +
+        highlightClassNames +
+        (is_active ? ' bg-brand-orange-600' : '')
+    : baseClassNames + (is_active ? 'bg-brand-orange-600' : '');
+};

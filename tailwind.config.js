@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brand-orange': '#d24115',
+        'brand-orange-700': '#d24115',
+        'brand-orange-600': '#ea580c',
       },
       fontFamily: {
         en: [
