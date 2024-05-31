@@ -7,11 +7,13 @@ import CourseSeries from './pages/CourseSeries/CourseSeries.tsx';
 import { store } from './store.ts';
 import './i18n/i18n';
 import { Provider } from 'react-redux';
+import ErrorPage from './pages/ErrorPage.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
