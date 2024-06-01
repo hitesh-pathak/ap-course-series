@@ -8,19 +8,50 @@ import { RootState } from '../../store';
 import { InvalidDataError } from '../../utils/custom-errors';
 import { StartCtnHrz } from '../../components/containers/container';
 import CSHeroBanner from './CSHeroBanner';
+import { StringDict } from '../../types/common';
+import { useMemo } from 'react';
+
+interface CSThumbNail {
+  domain: string;
+  basePath: string;
+  qualities: number[];
+  key: string;
+}
+
+export interface CSDetails {
+  thumbnail: CSThumbNail;
+  title: string;
+  subtitle: string;
+  description: string;
+}
 
 export default function CSHero() {
-  const csTitle: string = useSelector(
-    (state: RootState) => selectCouseSeries(state)?.details?.title || ''
+  const csDetails: CSDetails = useSelector(
+    (state: RootState) => selectCouseSeries(state)?.details || ''
   );
-  if (!csTitle) {
+  if (
+    !csDetails ||
+    !csDetails.title ||
+    !csDetails.subtitle ||
+    !csDetails.description ||
+    !csDetails.thumbnail
+  ) {
     throw new InvalidDataError();
   }
 
+  const thumbSrc = useMemo(
+    () => calcThumbnailSrc(csDetails.thumbnail),
+    [csDetails.thumbnail]
+  );
+
   return (
     <>
-      <CSTitle title={csTitle} />
-      <CSHeroBanner />
+      <CSTitle title={csDetails.title} />
+      <CSHeroBanner
+        thumbnailSrc={thumbSrc}
+        csSubTitle={csDetails.subtitle}
+        csDesc={csDetails.description}
+      />
     </>
   );
 }
@@ -51,4 +82,16 @@ function CSTitle({ title }: { title: string }) {
       </>
     </StartCtnHrz>
   );
+}
+
+function calcThumbnailSrc({
+  domain,
+  basePath,
+  qualities,
+  key,
+}: CSThumbNail): string {
+  const relPath = [basePath, qualities[0], key]
+    .map((e) => String(e).replace(/^\/+|\/+$/g, ''))
+    .join('/');
+  return new URL(relPath, domain).href;
 }

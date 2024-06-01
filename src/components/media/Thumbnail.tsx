@@ -7,7 +7,7 @@ export function ThumbnailImg({
   src,
   alt = 'Thumbnail',
   className,
-}: DefaultImgProps & { alt?: string }) {
+}: DefaultImgProps) {
   return (
     <img
       className={twClsx('h-full w-full object-cover', className)}
@@ -21,7 +21,7 @@ export function ThumbnailSigned({
   src,
   alt = 'Thumbnail',
   className,
-}: DefaultImgProps & { alt?: string }) {
+}: DefaultImgProps) {
   return (
     <FullExpandCtn className={twClsx('relative rounded', className)}>
       <>

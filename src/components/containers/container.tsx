@@ -1,9 +1,17 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { twClsx } from '../../utils/common';
 
 interface DefaultCtnProps extends HTMLAttributes<HTMLDivElement> {
-  children: JSX.Element;
+  children: ReactNode;
   className?: string;
+}
+
+export function VertFlexCtn({ children, className, ...rest }: DefaultCtnProps) {
+  return (
+    <div className={twClsx('flex flex-col', className)} {...rest}>
+      {children}
+    </div>
+  );
 }
 
 export function StartCtnHrz({ children, className, ...rest }: DefaultCtnProps) {
@@ -35,6 +43,22 @@ export function FullExpandCtn({
       className={twClsx('w-full h-full overflow-hidden', className)}
       {...rest}
     >
+      {children}
+    </div>
+  );
+}
+
+export function HiddenSmCtn({ children, className, ...rest }: DefaultCtnProps) {
+  return (
+    <div className={twClsx('hidden md:block', className)} {...rest}>
+      {children}
+    </div>
+  );
+}
+
+export function GapLgCtnHrz({ children, className, ...rest }: DefaultCtnProps) {
+  return (
+    <div className={twClsx('flex gap-6', className)} {...rest}>
       {children}
     </div>
   );
