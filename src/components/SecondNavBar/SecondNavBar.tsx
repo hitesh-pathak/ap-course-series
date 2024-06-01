@@ -15,7 +15,6 @@ export default function SecondNavBar() {
         <div className="flex h-12 w-full items-center justify-between">
           <LeftNavSect />
           <RightNavSect />
-          {/* put elements here*/}
         </div>
         {/* </div> */}
       </div>

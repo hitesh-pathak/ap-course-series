@@ -3,6 +3,7 @@ import CSNav from './CSNav';
 import { SpinnerFullScreen } from '../../components/common/Spinner';
 import CSHero from './CSHero';
 import CSCourses from './CSCourses';
+import CSFaq from './CSFaq';
 export default function CourseSeriesBody() {
   const {
     data: data,
@@ -26,6 +27,7 @@ export default function CourseSeriesBody() {
         <CSNav />
         <CSHero />
         <CSCourses />
+        <CSFaq />
       </div>
     );
   } else {

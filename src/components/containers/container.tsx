@@ -79,3 +79,56 @@ export function TagRoundXs({ children, className, ...rest }: DefaultCtnProps) {
     </div>
   );
 }
+
+export function VertScrollMenuCtn({
+  children,
+  className,
+  ...rest
+}: DefaultCtnProps) {
+  return (
+    <VertFlexCtn
+      className={twClsx('overflow-y-auto py-4', className)}
+      {...rest}
+    >
+      {children}
+    </VertFlexCtn>
+  );
+}
+
+export function RespMenuItemCtn({
+  children,
+  className,
+  ...rest
+}: DefaultCtnProps) {
+  return (
+    <StartCtnHrz
+      className={twClsx(
+        'cursor-pointer justify-between',
+        'min-w-[150px] lg:min-w-[270px]',
+        className
+      )}
+      {...rest}
+    >
+      {children}
+    </StartCtnHrz>
+  );
+}
+
+export function ModalOverlayFs({
+  className = '',
+  ...rest
+}: {
+  className?: string;
+}) {
+  return (
+    <div
+      className={twClsx(
+        'fixed z-10 inset-0',
+        'hidden md:block',
+        'bg-slate-700 opacity-60',
+        className
+      )}
+      {...rest}
+    ></div>
+  );
+}
