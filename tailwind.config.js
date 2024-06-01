@@ -11,6 +11,9 @@ export default {
         'brand-orange-100': '#ffedd5',
         'gray-title': '#1e293b',
         'gray-subtitle': '#475569',
+        'gray-separator': '#cad5e1',
+        'part-pointer-blue': '#94a3b8',
+        'blue-background': '#c7e6f8',
       },
       fontFamily: {
         en: [
@@ -57,6 +60,9 @@ export default {
       height: {
         'text-logo-md': '52px',
         'text-logo': '38px',
+      },
+      gridTemplateColumns: {
+        'auto-fill': 'repeat(auto-fill, minmax(0, 1fr))',
       },
     },
   },

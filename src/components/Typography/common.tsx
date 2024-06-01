@@ -1,21 +1,22 @@
+import { ReactNode } from 'react';
 import { twClsx } from '../../utils/common';
 
 interface DefaultProps {
-  children: JSX.Element;
+  children: ReactNode;
   className?: string;
 }
 
-export function SpanTextEn({ children, ...props }: { children: string }) {
+export function SpanTextEn({ children, className, ...rest }: DefaultProps) {
   return (
-    <span className="font-en" {...props}>
+    <span className={twClsx('font-en', className)} {...rest}>
       {children}
     </span>
   );
 }
 
-export function SpanTextHi({ children, ...props }: { children: string }) {
+export function SpanTextHi({ children, className, ...rest }: DefaultProps) {
   return (
-    <span className="font-hi" {...props}>
+    <span className={twClsx('font-hi', className)} {...rest}>
       {children}
     </span>
   );

@@ -42,6 +42,19 @@ input[type='search']::-ms-clear {
 @tailwind utilities;
 
 @layer components {
+  .btn-sm {
+    @apply leading-8 lg:leading-7 px-2 py-1;
+  }
+
+  .btn-base {
+    @apply leading-10 lg:leading-9;
+  }
+
+  .btn-solid {
+    border-width: 1px;
+    color: #f1f5f9;
+  }
+
   .spinner-base {
     @apply h-10 w-10 relative;
   }
@@ -62,6 +75,19 @@ input[type='search']::-ms-clear {
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.15s;
+  }
+
+  .part-pointer::after {
+    content: '&nbsp;';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 0;
+    width: 0;
+    border-top: 12px solid transparent;
+    border-right: 5px solid white;
+    border-bottom: 12px solid transparent;
   }
 }
 

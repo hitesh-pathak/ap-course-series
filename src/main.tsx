@@ -5,7 +5,6 @@ import App from './App.tsx';
 import './styles/output.css';
 import CourseSeries from './pages/CourseSeries/CourseSeries.tsx';
 import { store } from './store.ts';
-import './i18n/i18n';
 import { Provider } from 'react-redux';
 import ErrorPage from './pages/ErrorPage.tsx';
 

@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import { twClsx } from '../../utils/common';
 
-interface DefaultCtnProps extends HTMLAttributes<HTMLDivElement> {
+export interface DefaultCtnProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
 }
@@ -59,6 +59,22 @@ export function HiddenSmCtn({ children, className, ...rest }: DefaultCtnProps) {
 export function GapLgCtnHrz({ children, className, ...rest }: DefaultCtnProps) {
   return (
     <div className={twClsx('flex gap-6', className)} {...rest}>
+      {children}
+    </div>
+  );
+}
+
+export function TagRoundXs({ children, className, ...rest }: DefaultCtnProps) {
+  return (
+    <div
+      className={twClsx(
+        'flex items-center',
+        'px-2 py-1 rounded',
+        'font-normal text-xs',
+        className
+      )}
+      {...rest}
+    >
       {children}
     </div>
   );

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ButtonRound } from '../../components/common/Button';
+import { BtnRound } from '../../components/common/Button';
 import { SpanTextHi } from '../../components/Typography/common';
 import BackArrowLeft from '../../components/icons/BackArrowLeft';
 import { useSelector } from 'react-redux';
@@ -8,10 +8,10 @@ import { RootState } from '../../store';
 import { InvalidDataError } from '../../utils/custom-errors';
 import { StartCtnHrz } from '../../components/containers/container';
 import CSHeroBanner from './CSHeroBanner';
-import { StringDict } from '../../types/common';
 import { useMemo } from 'react';
 
 interface CSThumbNail {
+  id: string;
   domain: string;
   basePath: string;
   qualities: number[];
@@ -19,6 +19,7 @@ interface CSThumbNail {
 }
 
 export interface CSDetails {
+  id: string;
   thumbnail: CSThumbNail;
   title: string;
   subtitle: string;
@@ -60,9 +61,9 @@ export default function CSHero() {
 
 function BackButton() {
   return (
-    <ButtonRound className="lg:hidden -ml-4 p-4 bg-transparent fill-current text-brand-orange-600">
+    <BtnRound className="lg:hidden -ml-4 p-4 bg-transparent fill-current text-brand-orange-600">
       <BackArrowLeft width={15} height={13} />
-    </ButtonRound>
+    </BtnRound>
   );
 }
 

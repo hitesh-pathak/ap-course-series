@@ -1,18 +1,51 @@
 import { twClsx } from '../../utils/common';
 
-export function ButtonRound({
-  children,
-  className,
-  ...props
-}: {
+interface DefaultBtnProps {
   children: JSX.Element;
-  className: string;
-}) {
-  const baseCls = 'rounded cursor-pointer text-slate-700 px-2 py-2';
+  className?: string;
+}
 
+export function BtnRound({
+  children,
+  className = '',
+  ...rest
+}: DefaultBtnProps) {
   return (
-    <button className={twClsx(baseCls, className)} {...props}>
+    <button
+      className={twClsx(
+        'rounded-md cursor-pointer text-center text-slate-700 px-2 py-1',
+        className
+      )}
+      {...rest}
+    >
       {children}
     </button>
+  );
+}
+
+export function BtnRndTransition({
+  children,
+  className = '',
+  ...rest
+}: DefaultBtnProps) {
+  return (
+    <BtnRound
+      className={twClsx('transition-colors duration-150', className)}
+      {...rest}
+    >
+      {children}
+    </BtnRound>
+  );
+}
+
+export function BtnRndTransparent({
+  children,
+  className = '',
+  ...rest
+}: DefaultBtnProps) {
+  return (
+    <BtnRound className={twClsx('bg-transparent', className)} {...rest}>
+      {children}
+    </BtnRound>
   );
 }

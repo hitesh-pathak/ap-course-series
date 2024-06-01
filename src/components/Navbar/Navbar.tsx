@@ -1,5 +1,4 @@
 import { Link, NavLink } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import DropDownArrow from '../icons/DropDownArrow';
 import ContactButton from './ContactButton';
 import LngSelector from './LngSelector';
@@ -62,23 +61,21 @@ function NavMenuDropDown({ displayText, isActive = false }: NavMenuLinkProps) {
 }
 
 export default function Navbar() {
-  const { t, i18n } = useTranslation();
-
   const menuItems = [
-    'navbar.home',
-    'navbar.live_sess',
-    'navbar.video_series',
-    'navbar.ap_books',
-    'navbar.ap_articles',
-    'navbar.invite',
-    'navbar.in_media',
-    'navbar.careers',
-    'navbar.donate',
+    'Home',
+    'Live Sessions',
+    'Video Series',
+    'AP Books',
+    'AP Articles',
+    'Invite',
+    'In Media',
+    'Careers',
+    'Donate',
   ];
 
-  const menuDropDownLookup = ['navbar.live_sess', 'navbar.video_series'].reduce(
+  const menuDropDownLookup = ['Live Sessions', 'Video Series'].reduce(
     (acc: StringDict<boolean>, key: string) => {
-      acc[key] = key === 'navbar.video_series';
+      acc[key] = key === 'Video Series';
       return acc;
     },
     {}
@@ -102,13 +99,13 @@ export default function Navbar() {
                   menuDropDownLookup[menuItem] === undefined ? (
                     <NavMenuLink
                       to={'/'}
-                      displayText={t(menuItem)}
+                      displayText={menuItem}
                       isActive={menuDropDownLookup[menuItem] === true}
                       key={menuItem}
                     />
                   ) : (
                     <NavMenuDropDown
-                      displayText={t(menuItem)}
+                      displayText={menuItem}
                       isActive={menuDropDownLookup[menuItem] === true}
                       key={menuItem}
                     />

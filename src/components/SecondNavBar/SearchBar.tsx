@@ -1,5 +1,5 @@
 import { InputBar } from '../common/InputBar';
-import { ButtonRound } from '../common/Button';
+import { BtnRound } from '../common/Button';
 import { useState } from 'react';
 import CloseX from '../icons/CloseX';
 import SearchGlass from '../icons/SearchGlass';
@@ -26,7 +26,7 @@ export default function SearchBar() {
           <CloseX width={13} height={13} className="fill-current" />
         </div>
       )}
-      <ButtonRound
+      <BtnRound
         className={clsx(
           'items-end',
           'py-1 px-2 rounded-r rounded-l-none',
@@ -34,7 +34,7 @@ export default function SearchBar() {
         )}
       >
         <SearchGlass width={17} height={16} />
-      </ButtonRound>
+      </BtnRound>
     </>
   );
 }

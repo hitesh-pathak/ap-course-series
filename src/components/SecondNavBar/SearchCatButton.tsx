@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { SpanTextEn } from '../Typography/common';
+import { SpanTextEn, TextSubtitleCtn } from '../Typography/common';
 import DropDownArrow from '../icons/DropDownArrow';
 
 export default function SearchCatButton() {
@@ -11,9 +11,9 @@ export default function SearchCatButton() {
         'text-xs font-normal whitespace-nowrap'
       )}
     >
-      <div className="text-xs font-medium text-gray-subtitle">
+      <TextSubtitleCtn className="text-xs font-medium">
         <SpanTextEn>All</SpanTextEn>
-      </div>
+      </TextSubtitleCtn>
       <div className="px-3 text-slate-500">
         <DropDownArrow width={9} height={6} className="fill-current" />
       </div>
