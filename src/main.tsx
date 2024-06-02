@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import './styles/output.css';
+import './index.css';
+import './styles/fonts.css';
 import CourseSeries from './pages/CourseSeries/CourseSeries.tsx';
 import { store } from './store.ts';
 import { Provider } from 'react-redux';
