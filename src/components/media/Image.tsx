@@ -36,3 +36,33 @@ export function APSignLogo({ className }: { className?: string }) {
     />
   );
 }
+
+export function APFavicon({ className = '' }: { className?: string }) {
+  return (
+    <img
+      className={twClsx('mr-2 h-6 w-6', className)}
+      src="https://acharyaprashant.org/images/ic_favicon.png"
+      alt="Acharya Prashant"
+    ></img>
+  );
+}
+
+export function GPlayStore() {
+  return (
+    <img
+      src="https://acharyaprashant.org/images/ic_googleplay.png"
+      alt="Get it on Google Play"
+      className="rounded-md border-[1.4px] border-slate-300"
+    ></img>
+  );
+}
+
+export function AppleStore() {
+  return (
+    <img
+      src="https://acharyaprashant.org/images/ic_appstore.png"
+      alt="Download on the App Store"
+      className="rounded-md border-[1.4px] border-slate-300"
+    ></img>
+  );
+}
