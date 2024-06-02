@@ -3,7 +3,9 @@ import CSNav from './CSNav';
 import { SpinnerFullScreen } from '../../components/common/Spinner';
 import CSHero from './CSHero';
 import CSCourses from './CSCourses';
-import CSFaq from './CSFaq';
+import { Suspense, lazy } from 'react';
+
+const CSFaq = lazy(() => import('./CSFaq'));
 export default function CourseSeriesBody() {
   const {
     data: data,
@@ -27,7 +29,9 @@ export default function CourseSeriesBody() {
         <CSNav />
         <CSHero />
         <CSCourses />
-        <CSFaq />
+        <Suspense fallback={<></>}>
+          <CSFaq />
+        </Suspense>
       </div>
     );
   } else {

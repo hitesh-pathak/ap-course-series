@@ -2,8 +2,10 @@ import clsx from 'clsx';
 import { SpanTextEn, TextSubtitleCtn } from '../Typography/common';
 import DropDownArrow from '../icons/DropDownArrow';
 import { useEffect, useRef, useState } from 'react';
-import SearchDropDown from './SearchDropDown';
 import { ModalOverlayFs } from '../containers/container';
+import { Suspense, lazy } from 'react';
+
+const SearchDropDown = lazy(() => import('./SearchDropDown'));
 
 export default function SearchCatButton() {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -56,7 +58,9 @@ export default function SearchCatButton() {
             )}
             ref={dropdownRef}
           >
-            <SearchDropDown />
+            <Suspense fallback={<></>}>
+              <SearchDropDown />
+            </Suspense>
           </div>
         </>
       )}
