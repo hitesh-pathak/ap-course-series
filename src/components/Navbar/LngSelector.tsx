@@ -1,11 +1,12 @@
 import LngSelectEn from '../icons/LngSelectEn';
 import LngSelectHi from '../icons/LngSelectHi';
 import DropDownArrow from '../icons/DropDownArrow';
-import DropDownMenu from './DropDownMenu';
+import DropDownMenu, { MenuItemList } from './DropDownMenu';
 import { StringDict, SimpleHandler } from '../../types/common';
 import { useEffect, useRef, useState } from 'react';
 import { clsx } from 'clsx';
 import { getHandleClickOutside } from '../../utils/handlers';
+import { twClsx } from '../../utils/common';
 
 const lngs: StringDict<StringDict<any>> = {
   en: {
@@ -19,37 +20,6 @@ const lngs: StringDict<StringDict<any>> = {
     font: 'font-hi',
   },
 };
-
-function MenuItem({
-  handleClick,
-  activeKey,
-}: {
-  handleClick: SimpleHandler;
-  activeKey: string;
-}) {
-  return (
-    <>
-      {Object.entries(lngs).map(([lngKey, lngVal]) => (
-        <div
-          key={lngKey}
-          className={clsx(
-            'w-full cursor-pointer px-5 py-2 text-base font-medium hover:bg-slate-100',
-            {
-              'text-slate-900': activeKey !== lngKey,
-              'text-brand-orange-700': activeKey === lngKey,
-            }
-          )}
-          onClick={(e) => {
-            e.preventDefault();
-            handleClick(lngKey);
-          }}
-        >
-          <span className={lngVal.font ?? 'font-en'}>{lngVal.displayName}</span>
-        </div>
-      ))}
-    </>
-  );
-}
 
 export default function LngSelector() {
   const [inputLng, setLng] = useState('en');
@@ -110,7 +80,11 @@ export default function LngSelector() {
         </div>
         {showDropDownMenu && (
           <DropDownMenu
-            items={MenuItem({ handleClick: handleSelect, activeKey: inputLng })}
+            items={MenuItemList({
+              items: lngs,
+              handleClick: handleSelect,
+              activeKey: inputLng,
+            })}
             className="left-1/2 mt-2 -translate-x-1/2 transform py-1.5"
           />
         )}

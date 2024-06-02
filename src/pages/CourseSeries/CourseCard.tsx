@@ -169,6 +169,7 @@ function calcDuration(courseHours: ICSCourse['courseHours']) {
   }
   return (
     (hours ? `${String(hours)} ${hours === 1 ? 'hour' : 'hours'}` : '') +
+    ' ' +
     (minutes
       ? `${String(minutes)} ${minutes === 1 ? 'minute' : 'minutes'}`
       : '')

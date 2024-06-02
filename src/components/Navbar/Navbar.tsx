@@ -3,19 +3,12 @@ import DropDownArrow from '../icons/DropDownArrow';
 import ContactButton from './ContactButton';
 import LngSelector from './LngSelector';
 import clsx from 'clsx';
-import { StringDict } from '../../types/common';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import HamMenu from './HamMenu';
-import { TagRoundXs } from '../containers/container';
-import { BtnRound } from '../common/Button';
-import { SpanTextEn } from '../Typography/common';
 import DonateBtn from './DonateBtn';
+import DropDownMenu, { MenuItemList } from './DropDownMenu';
+import { getHandleClickOutside } from '../../utils/handlers';
 
-// interface NavMenuLinkProps {
-//   to?: string;
-//   displayText: string;
-//   isActive: boolean;
-// }
 interface NavMenuItemProps {
   highlightOnHover: boolean;
   isActive: boolean;
@@ -70,40 +63,65 @@ function NavMenuLink({
 function NavMenuDropDown({
   displayText,
   isActive = false,
+  menuItems,
   idx,
-}: NavMenuLinkProps) {
+}: NavMenuLinkProps & { menuItems?: string[] }) {
+  const [showMenu, setShowMenu] = useState(false);
+  const dropDownRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = getHandleClickOutside(dropDownRef, setShowMenu);
+
+  useEffect(() => {
+    if (showMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showMenu]);
+
   return (
     <NavMenuItem highlightOnHover={true} isActive={isActive} idx={idx}>
-      <div className="flex relative items-center space-x-2">
+      <div ref={dropDownRef} className="flex relative items-center space-x-2">
         <span className="font-en">{displayText}</span>
-        <div className="transition-duration-500 pt-0.5">
+        <div
+          className="transition-duration-500 pt-0.5"
+          onClick={() => setShowMenu((isVisible) => !isVisible && true)}
+        >
           <DropDownArrow className="fill-current" width={10} height={6} />
         </div>
+        {showMenu && Array.isArray(menuItems) && (
+          <DropDownMenu
+            items={MenuItemList({
+              items: menuItems.reduce((acc, curr) => {
+                acc[curr] = curr;
+                return acc;
+              }, {} as Record<string, string>),
+              className:
+                'text-sm text-slate-800 hover:bg-brand-orange-100 rounded-lg',
+            })}
+            className="absolute top-[40px] bg-white bg-opacity-100 px-1.5 py-2 text-slate-800 text-sm lg:-left-5 2xl:-left-6"
+          />
+        )}
       </div>
     </NavMenuItem>
   );
 }
 
 export default function Navbar() {
-  const menuItems = [
-    'Home',
-    'Live Sessions',
-    'Video Series',
-    'AP Books',
-    'AP Articles',
-    'Invite',
-    'In Media',
-    'Careers',
-    'Donate',
-  ];
-
-  const menuDropDownLookup = ['Live Sessions', 'Invite'].reduce(
-    (acc: StringDict<boolean>, key: string) => {
-      acc[key] = key === 'Video Series';
-      return acc;
-    },
-    {}
-  );
+  const menuDropDownLookup = {
+    Home: false,
+    'Live Sessions': ['Gita Samagam', 'Vedanta: Basics to Classics'],
+    'Video Series': false,
+    'AP Books': false,
+    'AP Articles': false,
+    Invite: ['For a talk', 'For an interview'],
+    'In Media': false,
+    Careers: false,
+    Donate: false,
+  };
 
   return (
     <div className="z-100">
@@ -119,8 +137,8 @@ export default function Navbar() {
                 />
               </Link>
               <div className="hidden items-stretch justify-center font-medium md:flex">
-                {menuItems.map((menuItem, i) =>
-                  menuDropDownLookup[menuItem] === undefined ? (
+                {Object.entries(menuDropDownLookup).map(([menuItem, val], i) =>
+                  !Array.isArray(val) ? (
                     <NavMenuLink
                       to={'/'}
                       displayText={menuItem}
@@ -131,9 +149,10 @@ export default function Navbar() {
                   ) : (
                     <NavMenuDropDown
                       displayText={menuItem}
-                      isActive={menuDropDownLookup[menuItem] === true}
+                      isActive={menuItem === 'Video Series'}
                       key={menuItem}
                       idx={i}
+                      menuItems={val}
                     />
                   )
                 )}

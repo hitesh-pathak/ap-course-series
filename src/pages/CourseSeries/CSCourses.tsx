@@ -1,13 +1,15 @@
 import clsx from 'clsx';
 import { SpanTextEn, TextTitleCtn } from '../../components/Typography/common';
 import { SectionCtn } from '../../components/containers/container';
-import { Link } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 import CourseCard from './CourseCard';
 import { HrzLineSeparator } from '../../components/common/Separator';
 import { useSelector } from 'react-redux';
 import { selectCouseSeries } from '../../api/csSlice';
 import { RootState } from '../../store';
 import { Grid1To4Cols, GridAutoFill } from '../../components/containers/grid';
+import CSPagination from './CSPagination';
+import { useMemo, useState } from 'react';
 
 export interface ICSCourse {
   id: string;
@@ -24,11 +26,24 @@ export default function CSCourses() {
   const csCourses: ICSCourse[] = useSelector(
     (state: RootState) => selectCouseSeries(state)?.courses || []
   );
+  const [onPage, setOnPage] = useState(1);
+  const pageSize = 25;
+  const numItems: number | undefined = csCourses?.length;
+
+  const numPages = Math.ceil(numItems / pageSize);
+  if (!(numItems >= 1 && onPage >= 1)) {
+    return <></>;
+  }
+  const paginatedCourses = useMemo(
+    () => csCourses.slice((onPage - 1) * pageSize, onPage * pageSize),
+    [onPage, pageSize]
+  );
 
   return (
     <>
-      <SectHeading numCourses={csCourses.length} />
-      <CoursesGrid courses={csCourses} />
+      <SectHeading numCourses={numItems} />
+      <CoursesGrid courses={paginatedCourses} />
+      <CSPagination {...{ onPage, setOnPage, numPages }} />
     </>
   );
 }

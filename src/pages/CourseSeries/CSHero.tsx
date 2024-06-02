@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { BackArrowButton, BtnRound } from '../../components/common/Button';
 import { SpanTextHi } from '../../components/Typography/common';
-import BackArrowLeft from '../../components/icons/BackArrowLeft';
 import { useSelector } from 'react-redux';
 import { selectCouseSeries } from '../../api/csSlice';
 import { RootState } from '../../store';
@@ -61,8 +60,7 @@ function CSTitle({ title }: { title: string }) {
   return (
     <StartCtnHrz className="px-4 lg:px-8 py-2 md:py-4 md:pt-4">
       <>
-        <BackArrowButton className="lg-hidden -ml-4 p-4 fill-current text-brand-orange-600" />
-        {/* <BackButton /> */}
+        <BackArrowButton className="lg:hidden -ml-4 p-4 fill-current text-brand-orange-600" />
 
         <div
           className={clsx(

@@ -5,6 +5,7 @@ import BackArrowLeft from '../icons/BackArrowLeft';
 interface DefaultBtnProps {
   children: JSX.Element;
   onClick?: AnyFuncT;
+  disabled?: boolean;
   className?: string;
 }
 
@@ -81,5 +82,20 @@ export function BtnRndFull({
     >
       {children}
     </button>
+  );
+}
+
+export function BtnFlexCenter({
+  children,
+  className = '',
+  ...rest
+}: DefaultBtnProps) {
+  return (
+    <BtnRndTransition
+      className={twClsx('flex items-center justify-center ', className)}
+      {...rest}
+    >
+      {children}
+    </BtnRndTransition>
   );
 }

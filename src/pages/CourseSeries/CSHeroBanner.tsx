@@ -54,9 +54,10 @@ export default function CSHeroBanner({
             <SpanTextHi>{csSubTitle}</SpanTextHi>
           </TextTitleCtn>
           <TextSubtitleCtn className="text-justify md:pr-4">
-            <HiddenSmCtn>
+            {/* TODO: read more functionality */}
+            <div>
               <SpanTextHi>{csDesc}</SpanTextHi>
-            </HiddenSmCtn>
+            </div>
           </TextSubtitleCtn>
         </VertFlexCtn>
       </StartCtnHrz>
