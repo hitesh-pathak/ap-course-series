@@ -8,6 +8,7 @@ import HamMenu from './HamMenu';
 import DonateBtn from './DonateBtn';
 import DropDownMenu, { MenuItemList } from './DropDownMenu';
 import { getHandleClickOutside } from '../../utils/handlers';
+import HamMenuBody from './HamMenuBody';
 
 interface NavMenuItemProps {
   highlightOnHover: boolean;

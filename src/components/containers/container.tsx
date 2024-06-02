@@ -95,6 +95,21 @@ export function VertScrollMenuCtn({
   );
 }
 
+export function VertCtnFullBetween({
+  children,
+  className,
+  ...rest
+}: DefaultCtnProps) {
+  return (
+    <div
+      className={twClsx('flex h-full flex-col justify-between', className)}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function RespMenuItemCtn({
   children,
   className,
@@ -120,7 +135,9 @@ export function FixedCtnInset({
   ...rest
 }: DefaultCtnProps) {
   return (
-    <div className={twClsx('fixed z-50 w-full', className)}>{children}</div>
+    <div className={twClsx('fixed z-50 w-full', className)} {...rest}>
+      {children}
+    </div>
   );
 }
 
@@ -140,5 +157,23 @@ export function ModalOverlayFs({
       )}
       {...rest}
     ></div>
+  );
+}
+
+export function CircleCenterCtn({
+  children,
+  className,
+  ...rest
+}: DefaultCtnProps) {
+  return (
+    <div
+      className={twClsx(
+        'flex items-center justify-center rounded-full text-center',
+        className
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
   );
 }
