@@ -15,7 +15,7 @@ export default function DropDownMenu({
     () =>
       clsx(
         'flex flex-col absolute overflow-hidden whitespace-nowrap',
-        'rounded-lg bg-white bg-opacity-100 shadow-lg'
+        'rounded-lg bg-white bg-opacity-100 shadow-lg transition duration-300 ease-in-out'
       ),
     []
   );

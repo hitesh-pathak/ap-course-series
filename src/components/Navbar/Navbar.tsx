@@ -3,7 +3,7 @@ import DropDownArrow from '../icons/DropDownArrow';
 import ContactButton from './ContactButton';
 import LngSelector from './LngSelector';
 import clsx from 'clsx';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { HTMLAttributes, useEffect, useMemo, useRef, useState } from 'react';
 import HamMenu from './HamMenu';
 import DonateBtn from './DonateBtn';
 import DropDownMenu, { MenuItemList } from './DropDownMenu';
@@ -26,7 +26,8 @@ function NavMenuItem({
   isActive = false,
   children,
   idx,
-}: NavMenuItemProps) {
+  ...rest
+}: NavMenuItemProps & HTMLAttributes<HTMLDivElement>) {
   const classNameCalc = useMemo(
     () => calculateClassNames(highlightOnHover, isActive),
     [highlightOnHover, isActive]
@@ -37,6 +38,7 @@ function NavMenuItem({
       className={clsx(classNameCalc, {
         'nav-menu-hide': idx === 6 || idx === 7,
       })}
+      {...rest}
     >
       {children}
     </div>
@@ -84,11 +86,17 @@ function NavMenuDropDown({
 
   return (
     <NavMenuItem highlightOnHover={true} isActive={isActive} idx={idx}>
-      <div ref={dropDownRef} className="flex relative items-center space-x-2">
+      <div
+        ref={dropDownRef}
+        className="flex relative items-center space-x-2"
+        onClick={() => setShowMenu((isVisible) => !isVisible && true)}
+      >
         <span className="font-en">{displayText}</span>
         <div
-          className="transition-duration-500 pt-0.5"
-          onClick={() => setShowMenu((isVisible) => !isVisible && true)}
+          className={clsx(
+            'transition duration-500 pt-0.5',
+            showMenu && 'rotate-180'
+          )}
         >
           <DropDownArrow className="fill-current" width={10} height={6} />
         </div>

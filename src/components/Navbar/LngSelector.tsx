@@ -6,7 +6,6 @@ import { StringDict, SimpleHandler } from '../../types/common';
 import { useEffect, useRef, useState } from 'react';
 import { clsx } from 'clsx';
 import { getHandleClickOutside } from '../../utils/handlers';
-import { twClsx } from '../../utils/common';
 
 const lngs: StringDict<StringDict<any>> = {
   en: {
@@ -45,16 +44,6 @@ export default function LngSelector() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showDropDownMenu]);
-
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (
-  //       dropDownRef.current &&
-  //       !dropDownRef.current.contains(event.target as Node)
-  //     ) {
-  //       toggleMenu(false);
-  //     }
-  //   };
 
   return (
     <div

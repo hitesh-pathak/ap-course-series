@@ -104,7 +104,13 @@ function FaqItem({
         <TextSubtitleCtn className="pr-2 font-semibold">
           <SpanTextEn>{qn || 'None'}</SpanTextEn>
         </TextSubtitleCtn>
-        <div className="h-3 w-3 text-slate-400 hover:text-slate-800">
+        <div
+          className={clsx(
+            'h-3 w-3 text-slate-400 hover:text-slate-800',
+            'transition duration-500',
+            currentQn === idx && 'rotate-180'
+          )}
+        >
           <ArrowDown width={11} height={7} />
         </div>
       </StartCtnHrz>

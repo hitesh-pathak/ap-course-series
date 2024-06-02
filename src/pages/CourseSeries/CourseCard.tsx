@@ -48,7 +48,7 @@ export default function CourseCard({
   return (
     <VertFlexCtn className="space-y-2">
       <div className="pb-2 self-start">
-        <PartPointer partText={`भाग ${series.order.seq}`} />
+        <PartPointer partText={`भाग ${series.order.seq || 0}`} />
       </div>
       <VertFlexCtn className="w-full text-left">
         <CourseBody
@@ -70,7 +70,7 @@ function CourseBody({
   amount,
   originalAmount,
   courseHours,
-}: Omit<ICSCourse, 'id' | 'language'>) {
+}: Omit<ICSCourse, 'id' | 'language' | 'series'>) {
   const duration = calcDuration(courseHours) || '0 hours';
 
   return (

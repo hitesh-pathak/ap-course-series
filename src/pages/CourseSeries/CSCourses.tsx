@@ -11,6 +11,11 @@ import { Grid1To4Cols, GridAutoFill } from '../../components/containers/grid';
 import CSPagination from './CSPagination';
 import { useMemo, useState } from 'react';
 
+export interface ICSSeries {
+  id: string | number;
+  order: { seq: number };
+}
+
 export interface ICSCourse {
   id: string;
   title: string;
@@ -20,6 +25,7 @@ export interface ICSCourse {
   originalAmount: number;
   courseHours: number;
   highlightTags?: string[];
+  series: ICSSeries;
 }
 
 export default function CSCourses() {
