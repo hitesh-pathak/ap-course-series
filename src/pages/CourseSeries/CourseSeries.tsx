@@ -3,7 +3,7 @@ import SecondNavBar from '../../components/SecondNavBar/SecondNavBar';
 import { SpinnerFullScreen } from '../../components/common/Spinner';
 // import CourseSeriesBody from './CourseSeriesBody';
 
-const CourseSeriesBody = lazy(() => delayForDemo(import('./CourseSeriesBody')));
+const CourseSeriesBody = lazy(() => import('./CourseSeriesBody'));
 const AppLinkBanner = lazy(() => import('./CSAppLinkBanner'));
 export default function CourseSeries() {
   return (
