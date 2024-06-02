@@ -3,8 +3,9 @@ import LngSelectHi from '../icons/LngSelectHi';
 import DropDownArrow from '../icons/DropDownArrow';
 import DropDownMenu from './DropDownMenu';
 import { StringDict, SimpleHandler } from '../../types/common';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { clsx } from 'clsx';
+import { getHandleClickOutside } from '../../utils/handlers';
 
 const lngs: StringDict<StringDict<any>> = {
   en: {
@@ -53,27 +54,49 @@ function MenuItem({
 export default function LngSelector() {
   const [inputLng, setLng] = useState('en');
   const [showDropDownMenu, setShowDropDownMenu] = useState(false);
+  const dropDownRef = useRef<HTMLDivElement>(null);
 
   const handleSelect = (lngKey: string) => {
-    console.log(lngKey, 'setting!');
     setLng(lngKey);
   };
 
-  const toggleDropDownMenu = (isVisible: boolean) => {
-    setShowDropDownMenu(isVisible);
-  };
+  const handleClickOutside = getHandleClickOutside(
+    dropDownRef,
+    setShowDropDownMenu
+  );
+
+  useEffect(() => {
+    if (showDropDownMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDropDownMenu]);
+
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (
+  //       dropDownRef.current &&
+  //       !dropDownRef.current.contains(event.target as Node)
+  //     ) {
+  //       toggleMenu(false);
+  //     }
+  //   };
 
   return (
     <div
       id="navbar-language-selector"
-      className="relative inline-flex ml-3 cursor-pointer items-center px-2 md:px-0 md:px-1"
+      className="relative inline-flex ml-3 cursor-pointer items-center px-2 md:px-1"
     >
-      <div className="relative">
+      <div ref={dropDownRef} className="relative">
         <div
           className="inline-flex items-center space-x-1 
         py-2 font-medium opacity-90 transition-opacity
         duration-300 ease-in-out hover:opacity-100"
-          onClick={() => setShowDropDownMenu(!showDropDownMenu)}
+          onClick={() => setShowDropDownMenu((isVisible) => !isVisible && true)}
         >
           {lngs[inputLng]?.icon}
           <div
@@ -88,7 +111,6 @@ export default function LngSelector() {
         {showDropDownMenu && (
           <DropDownMenu
             items={MenuItem({ handleClick: handleSelect, activeKey: inputLng })}
-            toggleMenu={toggleDropDownMenu}
             className="left-1/2 mt-2 -translate-x-1/2 transform py-1.5"
           />
         )}

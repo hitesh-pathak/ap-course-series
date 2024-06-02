@@ -2,25 +2,23 @@ import { Link, NavLink } from 'react-router-dom';
 import DropDownArrow from '../icons/DropDownArrow';
 import ContactButton from './ContactButton';
 import LngSelector from './LngSelector';
-import clsx from 'clsx';
+
 import { StringDict } from '../../types/common';
 import { useMemo } from 'react';
 import HamMenu from './HamMenu';
-import { TagRoundXs } from '../containers/container';
-import { BtnRound } from '../common/Button';
-import { SpanTextEn } from '../Typography/common';
-import DonateBtn from './DonateBtn';
+import clsx from 'clsx';
 
 // interface NavMenuLinkProps {
 //   to?: string;
 //   displayText: string;
 //   isActive: boolean;
+//   lpThresh?: boolean;
 // }
 interface NavMenuItemProps {
   highlightOnHover: boolean;
   isActive: boolean;
   children: JSX.Element;
-  idx: number;
+  lpThresh?: boolean;
 }
 
 type NavMenuLinkProps = Omit<
@@ -31,33 +29,42 @@ type NavMenuLinkProps = Omit<
 function NavMenuItem({
   highlightOnHover = false,
   isActive = false,
+  lpThresh,
   children,
-  idx,
 }: NavMenuItemProps) {
-  const classNameCalc = useMemo(
-    () => calculateClassNames(highlightOnHover, isActive),
-    [highlightOnHover, isActive]
-  );
+  // const classNameCalc = useMemo(
+  //   () => calculateClassNames(highlightOnHover, isActive),
+  //   [highlightOnHover, isActive]
+  // );
 
-  return (
-    <div
-      className={clsx(classNameCalc, {
-        'nav-menu-hide': idx === 6 || idx === 7,
-      })}
-    >
-      {children}
-    </div>
-  );
+  const baseClassNames =
+    'whitespace-nowrap text-white/90 cursor-pointer items-center space-x-1 md:px-1.5 lg:px-2.5 2xl:px-4';
+  const highlightClassNames =
+    'transition-opacity duration-300 ease-in-out hover:opacity-100 hover:bg-brand-orange-600';
+
+  const classNameCalc = clsx({
+    'flex invisible lp:visible': lpThresh,
+    flex: !lpThresh,
+    [baseClassNames]: true,
+    [highlightClassNames]: highlightOnHover,
+    'bg-brand-orange-600': isActive,
+  });
+
+  return <div className={classNameCalc}>{children}</div>;
 }
 
 function NavMenuLink({
   to = '/',
   displayText,
   isActive = false,
-  idx,
+  lpThresh = false,
 }: NavMenuLinkProps) {
   return (
-    <NavMenuItem highlightOnHover={false} isActive={isActive} idx={idx}>
+    <NavMenuItem
+      highlightOnHover={false}
+      isActive={isActive}
+      lpThresh={lpThresh}
+    >
       <Link to={to} className="flex">
         <div className="flex relative items-center space-x-2">
           <span className="font-en">{displayText}</span>
@@ -70,10 +77,14 @@ function NavMenuLink({
 function NavMenuDropDown({
   displayText,
   isActive = false,
-  idx,
+  lpThresh = false,
 }: NavMenuLinkProps) {
   return (
-    <NavMenuItem highlightOnHover={true} isActive={isActive} idx={idx}>
+    <NavMenuItem
+      highlightOnHover={true}
+      isActive={isActive}
+      lpThresh={lpThresh}
+    >
       <div className="flex relative items-center space-x-2">
         <span className="font-en">{displayText}</span>
         <div className="transition-duration-500 pt-0.5">
@@ -97,13 +108,14 @@ export default function Navbar() {
     'Donate',
   ];
 
-  const menuDropDownLookup = ['Live Sessions', 'Invite'].reduce(
+  const menuDropDownLookup = ['Live Sessions', 'Video Series', 'Invite'].reduce(
     (acc: StringDict<boolean>, key: string) => {
       acc[key] = key === 'Video Series';
       return acc;
     },
     {}
   );
+  const lpThresh = 5;
 
   return (
     <div className="z-100">
@@ -124,16 +136,16 @@ export default function Navbar() {
                     <NavMenuLink
                       to={'/'}
                       displayText={menuItem}
-                      isActive={menuItem === 'Video Series'}
+                      isActive={menuDropDownLookup[menuItem] === true}
                       key={menuItem}
-                      idx={i}
+                      lpThresh={i > lpThresh}
                     />
                   ) : (
                     <NavMenuDropDown
                       displayText={menuItem}
                       isActive={menuDropDownLookup[menuItem] === true}
                       key={menuItem}
-                      idx={i}
+                      lpThresh={i > lpThresh}
                     />
                   )
                 )}
@@ -141,7 +153,6 @@ export default function Navbar() {
             </div>
 
             <div className="flex h-full content-center items-center justify-center lg:mt-[1px] lg:pr-8">
-              <DonateBtn />
               <LngSelector />
               <ContactButton />
               <HamMenu />
@@ -161,11 +172,16 @@ const calculateClassNames = (
   const baseClassNames =
     'flex whitespace-nowrap text-white/90 cursor-pointer items-center space-x-1 md:px-1.5 lg:px-2.5 2xl:px-4';
   const highlightClassNames =
-    ' transition-opacity duration-300 ease-in-out hover:opacity-100 hover:bg-brand-orange-600';
+    'transition-opacity duration-300 ease-in-out hover:opacity-100 hover:bg-brand-orange-600';
 
+  return clsx(
+    baseClassNames,
+    { highlightClassNames: highlightOnHover },
+    { 'bg-brand-orange-600': is_active }
+  );
   return highlightOnHover
     ? baseClassNames +
         highlightClassNames +
         (is_active ? ' bg-brand-orange-600' : '')
-    : baseClassNames + (is_active ? ' bg-brand-orange-600' : '');
+    : baseClassNames + (is_active ? 'bg-brand-orange-600' : '');
 };

@@ -1,17 +1,15 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import { clsx } from 'clsx';
+import { twClsx } from '../../utils/common';
 
 interface DropDownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   items: JSX.Element;
-  toggleMenu: (isVisible: boolean) => void;
 }
 export default function DropDownMenu({
   items,
   className,
-  toggleMenu,
   ...rest
 }: DropDownMenuProps) {
-  const dropDownRef = useRef<HTMLDivElement>(null);
   const baseCls = useMemo(
     () =>
       clsx(
@@ -21,22 +19,8 @@ export default function DropDownMenu({
     []
   );
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropDownRef.current &&
-        !dropDownRef.current.contains(event.target as Node)
-      ) {
-        toggleMenu(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
   return (
-    <div ref={dropDownRef} className={clsx(baseCls, className)} {...rest}>
+    <div className={twClsx(baseCls, className)} {...rest}>
       {items}
     </div>
   );

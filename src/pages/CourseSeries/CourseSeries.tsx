@@ -4,15 +4,17 @@ import { SpinnerFullScreen } from '../../components/common/Spinner';
 // import CourseSeriesBody from './CourseSeriesBody';
 
 const CourseSeriesBody = lazy(() => delayForDemo(import('./CourseSeriesBody')));
-
+const AppLinkBanner = lazy(() => import('./CSAppLinkBanner'));
 export default function CourseSeries() {
   return (
     <div className="flex-grow min-h-full w-full">
       <SecondNavBar />
       <div className="relative mx-auto max-w-screen-2xl">
-        {/* body comes here */}
         <Suspense fallback={<SpinnerFullScreen />}>
           <CourseSeriesBody />
+        </Suspense>
+        <Suspense fallback={<></>}>
+          <AppLinkBanner />
         </Suspense>
       </div>
     </div>

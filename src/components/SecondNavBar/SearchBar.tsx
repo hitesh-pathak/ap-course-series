@@ -4,28 +4,47 @@ import { useState } from 'react';
 import CloseX from '../icons/CloseX';
 import SearchGlass from '../icons/SearchGlass';
 import clsx from 'clsx';
+import { StringDict } from '../../types/common';
 
-export default function SearchBar() {
+export default function SearchBar({
+  styleInput = '',
+  styleCancel = '',
+  placeholder = '',
+  ...rest
+}: {
+  styleInput?: string;
+  styleCancel?: string;
+  placeholder?: string;
+} & StringDict<any>) {
   const [inputVal, setValue] = useState<string | undefined>('');
-  const placeholder = ' Search for video series';
-
+  // const placeholder = ' Search for video series';
   return (
     <>
       <InputBar
         type="search"
         placeholder={placeholder}
-        className="w-full h-9 text-gray-title caret-brand-orange-600"
+        className={styleInput}
         value={inputVal}
         onChange={(e) => setValue(e.target.value ?? placeholder)}
+        {...rest}
       />
       {inputVal && (
-        <div
-          className="mr-4 cursor-pointer self-center text-slate-600"
-          onClick={(_e) => setValue('')}
-        >
+        <div className={styleCancel} onClick={(_e) => setValue('')}>
           <CloseX width={13} height={13} className="fill-current" />
         </div>
       )}
+    </>
+  );
+}
+
+export function SearchBarWithBtn() {
+  return (
+    <>
+      <SearchBar
+        styleInput="w-full h-9 text-gray-title caret-brand-orange-600"
+        styleCancel="mr-4 cursor-pointer self-center text-slate-600"
+        placeholder=" Search for video series"
+      />
       <BtnRound
         className={clsx(
           'items-end',

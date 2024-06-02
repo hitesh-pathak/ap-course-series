@@ -114,6 +114,16 @@ export function RespMenuItemCtn({
   );
 }
 
+export function FixedCtnInset({
+  children,
+  className,
+  ...rest
+}: DefaultCtnProps) {
+  return (
+    <div className={twClsx('fixed z-50 w-full', className)}>{children}</div>
+  );
+}
+
 export function ModalOverlayFs({
   className = '',
   ...rest

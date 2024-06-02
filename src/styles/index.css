@@ -43,11 +43,16 @@ input[type='search']::-ms-clear {
 
 @layer components {
   .btn-sm {
-    @apply leading-8 lg:leading-7 px-2 py-1;
+    @apply leading-[2] lg:leading-[1.8] px-2 py-1;
   }
 
   .btn-base {
     @apply leading-10 lg:leading-9;
+  }
+
+  .btn-lg {
+    padding: 0.625rem 1.5rem;
+    color: #f1f5f9;
   }
 
   .btn-solid {
@@ -78,7 +83,7 @@ input[type='search']::-ms-clear {
   }
 
   .part-pointer::after {
-    content: '&nbsp;';
+    content: '';
     position: absolute;
     right: 0;
     top: 0;
@@ -118,5 +123,11 @@ input[type='search']::-ms-clear {
 
   .animate-spinner {
     animation: spinner 0.8s linear infinite;
+  }
+
+  @media (max-width: 1024px) {
+    div.nav-menu-hide.flex {
+      display: none;
+    }
   }
 }

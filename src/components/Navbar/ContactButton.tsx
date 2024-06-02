@@ -7,7 +7,7 @@ export default function ContactButton() {
       to={'/'}
       className="hidden text-white hover:cursor-pointer ml-4.5 lg:block"
     >
-      <ContactPhone width={16} height={16} className="fill-current" />
+      <ContactPhone className="w-5 h-5 fill-current" />
     </Link>
   );
 }

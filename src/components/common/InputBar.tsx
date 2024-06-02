@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import { twClsx } from '../../utils/common';
 
 interface InputBarProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -10,12 +10,12 @@ interface InputBarProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function InputBar({
   type = 'text',
-  placeholder = 'Search...',
+  placeholder = '',
   className = '',
   ...props
 }: InputBarProps) {
   const baseCls =
-    'w-full border-0 text-gray-title focus:ring-0 focus-visible:ring-0 focus:outline-none';
+    'border-0 focus:ring-0 focus-visible:ring-0 focus:outline-none';
 
   return (
     <input
@@ -26,3 +26,27 @@ export function InputBar({
     />
   );
 }
+
+// export function SearchBar({
+//   type = 'text',
+//   placeholder = '',
+//   className = '',
+//   ...props
+// }: InputBarProps) {
+//   const [inputVal, setValue] = useState<string | undefined>('');
+
+//   const baseCls =
+//     'border-0 focus:ring-0 focus-visible:ring-0 focus:outline-none';
+
+//   return (
+//     <InputBar
+//       type=
+//       value={inputVal}
+//       onChange={(e) => setValue(e.target.value ?? placeholder)}
+//       className={twClsx(baseCls, className)}
+//       placeholder={placeholder}
+//       {...props}
+//     />
+//     {inputVal && }
+//   );
+// }

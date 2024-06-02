@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { BtnRound } from '../../components/common/Button';
+import { BackArrowButton, BtnRound } from '../../components/common/Button';
 import { SpanTextHi } from '../../components/Typography/common';
 import BackArrowLeft from '../../components/icons/BackArrowLeft';
 import { useSelector } from 'react-redux';
@@ -57,21 +57,13 @@ export default function CSHero() {
   );
 }
 
-// function
-
-function BackButton() {
-  return (
-    <BtnRound className="lg:hidden -ml-4 p-4 bg-transparent fill-current text-brand-orange-600">
-      <BackArrowLeft width={15} height={13} />
-    </BtnRound>
-  );
-}
-
 function CSTitle({ title }: { title: string }) {
   return (
     <StartCtnHrz className="px-4 lg:px-8 py-2 md:py-4 md:pt-4">
       <>
-        <BackButton />
+        <BackArrowButton className="lg-hidden -ml-4 p-4 fill-current text-brand-orange-600" />
+        {/* <BackButton /> */}
+
         <div
           className={clsx(
             'text-lg font-semibold text-gray-title md:text-xl lg:text-2xl',

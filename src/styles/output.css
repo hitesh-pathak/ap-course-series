@@ -635,12 +635,12 @@ input[type='search']::-ms-clear {
   padding-right: 0.5rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-  line-height: 2rem;
+  line-height: 2;
 }
 
 @media (min-width: 1024px) {
   .btn-sm {
-    line-height: 1.75rem;
+    line-height: 1.8;
   }
 }
 
@@ -652,6 +652,11 @@ input[type='search']::-ms-clear {
   .btn-base {
     line-height: 2.25rem;
   }
+}
+
+.btn-lg {
+  padding: 0.625rem 1.5rem;
+  color: #f1f5f9;
 }
 
 .btn-solid {
@@ -690,7 +695,7 @@ input[type='search']::-ms-clear {
 }
 
 .part-pointer::after {
-  content: '&nbsp;';
+  content: '';
   position: absolute;
   right: 0;
   top: 0;
@@ -721,6 +726,14 @@ input[type='search']::-ms-clear {
 .dynamicHTMLContainer > p > a {
   --tw-text-opacity: 1;
   color: rgb(210 65 21 / var(--tw-text-opacity));
+}
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .fixed {
@@ -759,6 +772,10 @@ input[type='search']::-ms-clear {
   left: 50%;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .right-1 {
   right: 0.25rem;
 }
@@ -781,6 +798,10 @@ input[type='search']::-ms-clear {
 
 .z-40 {
   z-index: 40;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .z-75 {
@@ -806,6 +827,14 @@ input[type='search']::-ms-clear {
   margin-bottom: 1rem;
 }
 
+.-ml-2 {
+  margin-left: -0.5rem;
+}
+
+.-ml-2\.5 {
+  margin-left: -0.625rem;
+}
+
 .-ml-4 {
   margin-left: -1rem;
 }
@@ -820,6 +849,10 @@ input[type='search']::-ms-clear {
 
 .mb-2\.5 {
   margin-bottom: 0.625rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 
 .mb-6 {
@@ -850,12 +883,20 @@ input[type='search']::-ms-clear {
   margin-right: 0.25rem;
 }
 
+.mr-1\.5 {
+  margin-right: 0.375rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
 
 .mr-4 {
   margin-right: 1rem;
+}
+
+.mr-\[12px\] {
+  margin-right: 12px;
 }
 
 .mt-0 {
@@ -880,10 +921,6 @@ input[type='search']::-ms-clear {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
 }
 
 .flex {
@@ -926,6 +963,10 @@ input[type='search']::-ms-clear {
   height: 1rem;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .h-6 {
   height: 1.5rem;
 }
@@ -944,6 +985,10 @@ input[type='search']::-ms-clear {
 
 .h-\[0\.5px\] {
   height: 0.5px;
+}
+
+.h-\[14px\] {
+  height: 14px;
 }
 
 .h-\[24px\] {
@@ -970,6 +1015,10 @@ input[type='search']::-ms-clear {
   min-height: 100vh;
 }
 
+.w-28 {
+  width: 7rem;
+}
+
 .w-3 {
   width: 0.75rem;
 }
@@ -978,12 +1027,24 @@ input[type='search']::-ms-clear {
   width: 1rem;
 }
 
+.w-5 {
+  width: 1.25rem;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+
 .w-7 {
   width: 1.75rem;
 }
 
 .w-8 {
   width: 2rem;
+}
+
+.w-\[14px\] {
+  width: 14px;
 }
 
 .w-\[36rem\] {
@@ -996,14 +1057,6 @@ input[type='search']::-ms-clear {
 
 .w-px {
   width: 1px;
-}
-
-.w-6 {
-  width: 1.5rem;
-}
-
-.w-28 {
-  width: 7rem;
 }
 
 .min-w-0 {
@@ -1220,6 +1273,10 @@ input[type='search']::-ms-clear {
   border-width: 1.4px;
 }
 
+.border-\[1\.5px\] {
+  border-width: 1.5px;
+}
+
 .border-r {
   border-right-width: 1px;
 }
@@ -1234,14 +1291,14 @@ input[type='search']::-ms-clear {
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
 .border-slate-300 {
   --tw-border-opacity: 1;
   border-color: rgb(203 213 225 / var(--tw-border-opacity));
+}
+
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
 .bg-blue-background {
@@ -1370,6 +1427,11 @@ input[type='search']::-ms-clear {
   padding-right: 0.5rem;
 }
 
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -1420,9 +1482,19 @@ input[type='search']::-ms-clear {
   padding-bottom: 0.5rem;
 }
 
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.py-\[10px\] {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .pb-10 {
@@ -1449,6 +1521,10 @@ input[type='search']::-ms-clear {
   padding-left: 0.25rem;
 }
 
+.pl-1\.5 {
+  padding-left: 0.375rem;
+}
+
 .pl-2 {
   padding-left: 0.5rem;
 }
@@ -1459,6 +1535,14 @@ input[type='search']::-ms-clear {
 
 .pl-5 {
   padding-left: 1.25rem;
+}
+
+.pr-0 {
+  padding-right: 0px;
+}
+
+.pr-0\.5 {
+  padding-right: 0.125rem;
 }
 
 .pr-2 {
@@ -1646,6 +1730,12 @@ input[type='search']::-ms-clear {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-none {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -1699,6 +1789,12 @@ input[type='search']::-ms-clear {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1024px) {
+  div.nav-menu-hide.flex {
+    display: none;
   }
 }
 
@@ -1784,6 +1880,14 @@ input[type='search']::-ms-clear {
     margin-left: -0.375rem;
   }
 
+  .md\:mb-5 {
+    margin-bottom: 1.25rem;
+  }
+
+  .md\:mr-0 {
+    margin-right: 0px;
+  }
+
   .md\:mt-12 {
     margin-top: 3rem;
   }
@@ -1796,20 +1900,20 @@ input[type='search']::-ms-clear {
     margin-top: 62px;
   }
 
-  .md\:mb-5 {
-    margin-bottom: 1.25rem;
-  }
-
-  .md\:mr-0 {
-    margin-right: 0px;
-  }
-
   .md\:block {
     display: block;
   }
 
   .md\:flex {
     display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
+  .md\:h-4 {
+    height: 1rem;
   }
 
   .md\:h-text-logo-md {
@@ -1826,6 +1930,10 @@ input[type='search']::-ms-clear {
 
   .md\:w-2\/5 {
     width: 40%;
+  }
+
+  .md\:w-4 {
+    width: 1rem;
   }
 
   .md\:w-\[114px\] {
@@ -1954,6 +2062,12 @@ input[type='search']::-ms-clear {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
+
+  @media (max-width: 1024px) {
+    div.md\:flex.nav-menu-hide {
+      display: none;
+    }
+  }
 }
 
 @media (min-width: 1024px) {
@@ -2054,6 +2168,10 @@ input[type='search']::-ms-clear {
 
   .lg\:pl-8 {
     padding-left: 2rem;
+  }
+
+  .lg\:pl-\[11px\] {
+    padding-left: 11px;
   }
 
   .lg\:pr-12 {
