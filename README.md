@@ -7,6 +7,14 @@ The latest commit from this branch is deployed on render.
 ## Techstack
 - React with Typescript using Vite
 - Tailwindcss
+- [Redux Toolkit](https://redux-toolkit.js.org/) for state management
+- [Redux Toolkit Query or RTK Query](https://redux-toolkit.js.org/rtk-query/overview) for much better data-fetching from APIs
+
+## Features
+- Lazy Loding: I've used lazy loading to render off-screen components like the FAQs section. I've used [React's lazy()](https://react.dev/reference/react/lazy) for this purpose
+- Type Safety: For better type safety, I've used Typescript
+- Data Caching: I've implemented data-fetching with RTK Query & also ensured that the data gets cached,
+  so we do not end up spamming the APIs just because a component requiring the data rendered multiple times
 
 ## Running the Project Locally
 
