@@ -1,8 +1,54 @@
-# React + Vite
+# Intro
+This project is a static webapp clone of the [webpage](https://acharyaprashant.org/en/video-modules/series/cs-5ddbd9).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Techstack
+- React with Typescript using Vite
+- Tailwindcss
 
-Currently, two official plugins are available:
+## Running the Project Locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+Make sure you have Node.js and npm installed on your development machine. You can download them from [nodejs.org](https://nodejs.org/).
+
+### Installation
+
+1. **Clone the repository**:
+
+    ```sh
+    git clone https://github.com/your-username/your-repo.git
+    cd your-repo
+    ```
+
+2. **Install dependencies**:
+
+    ```sh
+    npm install
+    ```
+
+3. **Run the development server**:
+
+    ```sh
+    npm run dev
+    ```
+
+    This will start the Vite development server. Open [http://localhost:3000](http://localhost:3000) to view it in your browser. The page will reload when you make changes.
+
+4. **Build for production**:
+
+    ```sh
+    npm run build
+    ```
+
+    This will create an optimized production build of your project.
+
+5. **Preview the production build**:
+
+    ```sh
+    npm run preview
+    ```
+
+    This will preview the production build locally.
+
