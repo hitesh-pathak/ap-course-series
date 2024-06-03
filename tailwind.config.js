@@ -6,6 +6,7 @@ export default {
       colors: {
         'brand-orange-hover-dark': '#d24115',
         'brand-orange-700': '#d24115',
+        'brand-orange-500': '#f97316',
         'brand-orange-600': '#ea580c',
         'brand-orange-200': '#fed7aa',
         'brand-orange-100': '#ffedd5',
@@ -14,6 +15,7 @@ export default {
         'gray-separator': '#cad5e1',
         'part-pointer-blue': '#94a3b8',
         'blue-background': '#c7e6f8',
+        'gray-background': '#f1f5f9',
       },
       fontFamily: {
         en: [

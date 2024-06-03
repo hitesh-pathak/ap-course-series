@@ -3,24 +3,27 @@ import {
   CircleCenterCtn,
   FixedCtnInset,
   VertCtnFullBetween,
+  VertFlexCtn,
+  VertScrollMenuCtn,
 } from '../containers/container';
 import UserProfileHead from '../icons/UserProfileHead';
 import { SpanTextEn } from '../Typography/common';
 import { HrzLineSeparator } from '../common/Separator';
 import clsx from 'clsx';
 import CloseX from '../icons/CloseX';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
+import { animated, useSpring } from '@react-spring/web';
 
-export default function HamMenuBody({
-  ...rest
-}: HTMLAttributes<HTMLDivElement>) {
+export default function HamMenuBody({ isVisible }: { isVisible: boolean }) {
+  const animate = useSpring({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateX(0%)' : 'translateX(100%)',
+  });
+
   return (
-    <FixedCtnInset
-      className={clsx(
-        'z-150 bottom-0 right-0 top-0 hidden md:block md:w-[25vw] lg:w-[35vw]',
-        'transition duration-300 ease-in-out'
-      )}
-      {...rest}
+    <animated.div
+      className={clsx('fixed z-[200] bottom-0 right-0 top-0 hidden md:block')}
+      style={animate}
     >
       <div className="flex h-full items-start justify-end bg-transparent">
         <CircleCenterCtn
@@ -35,14 +38,48 @@ export default function HamMenuBody({
           <VertMenu />
         </div>
       </div>
-    </FixedCtnInset>
+    </animated.div>
   );
 }
 
 function VertMenu() {
+  const menuEntries = [
+    {
+      heading: '',
+      items: [
+        'Gita Samagam',
+        'Vedanta: Basics to Classics',
+        'AP Books',
+        'AP Articles',
+        'Video Series',
+        'AP Circle',
+        'Invite For Talk',
+        'Invite For an Interview',
+        'Media and Public Interaction',
+        'Contact Us',
+        'Careers',
+        'Donate',
+      ],
+    },
+    {
+      heading: 'MORE',
+      items: [
+        'PrashantAdvait Foundation',
+        'Ghar Ghar Upanishad',
+        'About Acharya Prashant',
+      ],
+    },
+  ];
+
   return (
-    <VertCtnFullBetween>
+    <VertCtnFullBetween className="justify-start">
       <MenuTopLogin />
+      {menuEntries.map((menu, i) => (
+        <InnerMenu
+          key={i}
+          {...{ ...menu, isLast: i >= menuEntries.length - 1 }}
+        />
+      ))}
     </VertCtnFullBetween>
   );
 }
@@ -58,5 +95,72 @@ function MenuTopLogin() {
       </Link>
       <HrzLineSeparator className="mt-4" />
     </div>
+  );
+}
+
+function InnerMenu({
+  heading,
+  items,
+  isLast = false,
+}: {
+  heading: string | undefined;
+  items: string[];
+  isLast?: boolean;
+}) {
+  return (
+    <>
+      {heading && <InnerMenuHeading>{heading}</InnerMenuHeading>}
+      <InnerMenuCtn>
+        {items.map((e, i) => (
+          <InnerMenuItem key={i}>{e}</InnerMenuItem>
+        ))}
+      </InnerMenuCtn>
+      <InnerMenuDivider noLine={isLast} />
+    </>
+  );
+}
+
+function InnerMenuCtn({ children }: { children: ReactNode }) {
+  return (
+    <VertFlexCtn
+      className={clsx(
+        'my-1 px-2 md:px-3',
+        'text-sm font-medium text-gray-subtitle'
+      )}
+    >
+      {children}
+    </VertFlexCtn>
+  );
+}
+
+function InnerMenuHeading({ children }: { children: ReactNode }) {
+  return (
+    <div
+      className={clsx('mx-3 my-1 px-5', 'font-bold text-xs text-gray-subtitle')}
+    >
+      {children}
+    </div>
+  );
+}
+
+function InnerMenuItem({ children }: { children: ReactNode }) {
+  return (
+    <div
+      className={clsx(
+        'mx-3 rounded-md px-2 py-2',
+        'hover:text-slate-900 hover:bg-gray-background',
+        'cursor-pointer'
+      )}
+    >
+      <Link to={'/'} className="w-full h-full ">
+        <SpanTextEn>{children}</SpanTextEn>
+      </Link>
+    </div>
+  );
+}
+
+function InnerMenuDivider({ noLine = false }: { noLine?: boolean }) {
+  return (
+    <div className="mx-6 mx-6 mb-3 mt-5">{!noLine && <HrzLineSeparator />}</div>
   );
 }
