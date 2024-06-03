@@ -23,14 +23,15 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 
 Make sure you have Node.js and npm installed on your development machine. You can download them from [nodejs.org](https://nodejs.org/).
+I've used the latest LTS version of npm so that will be the most compatible setting.
 
 ### Installation
 
 1. **Clone the repository**:
 
     ```sh
-    git clone https://github.com/your-username/your-repo.git
-    cd your-repo
+    git clone https://github.com/hitesh-pathak/ap-course-series.git
+    cd ap-course-series
     ```
 
 2. **Install dependencies**:
@@ -39,27 +40,28 @@ Make sure you have Node.js and npm installed on your development machine. You ca
     npm install
     ```
 
-3. **Run the development server**:
+3. **View the Development version**:
 
     ```sh
     npm run dev
     ```
 
-    This will start the Vite development server. Open [http://localhost:3000](http://localhost:3000) to view it in your browser. The page will reload when you make changes.
+    This will start the Vite development server. Open the link shown in the terminal to view it in your browser. This is the development snapshot of the project.
+    If you want to preview the project in production instead, follow the below listed steps!
 
-4. **Build for production**:
+5. **Build for production**:
 
     ```sh
     npm run build
     ```
 
-    This will create an optimized production build of your project.
+    This will create an optimized production build of the project.
 
-5. **Preview the production build**:
+6. **Preview the production build**:
 
     ```sh
     npm run preview
     ```
 
-    This will preview the production build locally.
+    This will preview the production build locally. Again Vite should show a url in the terminal, please open this to preview the production version.
 
