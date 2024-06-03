@@ -2,7 +2,7 @@
 This project is a static webapp clone of [Archarya Prashant's website's video series page](https://acharyaprashant.org/en/video-modules/series/cs-5ddbd9).
 The latest commit from this branch is deployed on render.
 
-**[Link to Deployed App on Render]((https://ap-video-series.onrender.com/))**
+[Link to Deployed App on Render]((https://ap-video-series.onrender.com/))
 
 ## Techstack
 - React with Typescript using Vite
